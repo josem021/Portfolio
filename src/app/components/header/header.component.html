@@ -1,1 +1,35 @@
-<p>header works!</p>
+<header>
+    <nav class="headerMain">
+      <section class="header--left">
+        <h1>Josem021</h1>
+        <div class="icons-language">
+          <img src="assets/img/english-icon.png" alt="english-icon">
+          <img src="assets/img/spain-icon.png" alt="spain-icon">
+        </div>
+        <div id="hamburger-menu" class="hamburger-menu" (click)="toggleMenu()" [ngClass]="{'open': isMenuOpen}">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </section>
+      <section class="header--right" [ngClass]="{'open': isMenuOpen}">
+        <a routerLink="/inicio" routerLinkActive="active" (click)="closeMenu()">Inicio</a>
+        <a routerLink="/proyectos" routerLinkActive="active" (click)="closeMenu()">Proyectos</a>
+        <a routerLink="/habilidades" routerLinkActive="active" (click)="closeMenu()">Habilidades</a>
+        <a routerLink="/contacto" routerLinkActive="active" (click)="closeMenu()">Contacto</a>
+        @if (isMenuOpen) {
+          <div class="buttonsCV">
+            <button>Descargar CV</button>
+            <div class="buttonsCV--Column">
+              <a routerLink="">
+                <img src="assets/img/linkedin.svg" alt="LinkedIn">
+              </a>
+              <a routerLink="https://github.com/tu-usuario">
+                <img src="assets/img/github-logo.svg" alt="GitHub">
+              </a>
+            </div>
+          </div>
+        }
+      </section>
+    </nav>
+  </header>

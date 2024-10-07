@@ -1,0 +1,212 @@
+.headerMain {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 14vw;
+  z-index: 3;
+  transition: none;
+}
+h1 {
+  color: #8ffdf3;
+  font-size: 26px;
+  cursor: default;
+  -webkit-user-drag: none;
+}
+img {
+  -webkit-user-drag: none;
+  cursor: pointer;
+}
+.header--left {
+  display: flex;
+  align-items: center;
+  width: auto;
+  gap: 0.4vw;
+}
+.icons-language {
+  display: flex;
+  gap: 0.4vw;
+  height: 32px;
+}
+.hamburger-menu {
+  margin-left: auto;
+}
+.header--right {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: auto;
+  gap: 2vw;
+}
+.header--right a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s ease;
+  text-shadow: 1px 1px 2px rgb(0, 0, 0);
+  -webkit-user-drag: none;
+}
+.header--right a:hover {
+  color: #8ffdf3;
+  text-shadow: 1px 1px 2px rgb(0, 0, 0);
+  transition: 0.3s ease;
+}
+body.menu-open {
+  overflow: hidden;
+}
+.buttonsCV {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-top: 60px;
+}
+.buttonsCV--Column {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+}
+.buttonsCV button {
+  background-color: #8ffdf3;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  height: 60px;
+  width: 180px;
+}
+.buttonsCV img {
+  height: 62px;
+}
+
+/* Mostrar el menú vertical al abrir */
+.header--right.open {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 50vw;
+  background-color: #14062acc;
+  backdrop-filter: blur(3px);
+  justify-content: flex-start;
+  padding-top: 15vh;
+  z-index: 999;
+  border: 0.4px solid rgb(255, 255, 255);
+  border-radius: 1vw;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+}
+.header--right.open a {
+  color: white;
+  padding: 10px 0;
+  font-size: 1.5rem;
+}
+.header--right.open a:hover {
+  color: #8ffdf3;
+}
+/* Estilos del menú hamburguesa */
+.hamburger-menu {
+  display: none;
+  width: 36px;
+  height: 30px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1000;
+}
+
+.hamburger-menu span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: #8ffdf3;
+  border-radius: 3.5px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+/* Posicionamos las tres barras */
+.hamburger-menu span:nth-child(1) {
+  top: 0px;
+}
+
+.hamburger-menu span:nth-child(2) {
+  top: 13px;
+}
+
+.hamburger-menu span:nth-child(3) {
+  top: 26px;
+}
+
+/* Animación para formar la "X" */
+.hamburger-menu.open span:nth-child(1) {
+  top: 13px;
+  transform: rotate(135deg);
+}
+
+.hamburger-menu.open span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.hamburger-menu.open span:nth-child(3) {
+  top: 13px;
+  transform: rotate(-135deg);
+}
+
+/* Media queries */
+@media (max-width: 585px) {
+  .header--right {
+    display: none;
+  }
+  .hamburger-menu {
+    display: flex;
+  }
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 868px) {
+  .headerMain {
+    margin: 0 8vw;
+    transition: all 0.3s ease;
+  }
+  .header--left {
+    width: auto;
+  }
+  .icons-language {
+    display: flex;
+    gap: 0.1vw;
+    height: 32px;
+  }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 692px) {
+  .headerMain {
+    flex-direction: column;
+    margin: 0 12vw;
+    transition: all 0.3s ease;
+  }
+  .header--left {
+    width: 100%;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  .icons-language {
+    gap: 1.5vw;
+  }
+  .header--right {
+    display: none;
+  }
+  .hamburger-menu {
+    display: flex;
+  }
+}
