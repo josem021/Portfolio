@@ -1,0 +1,149 @@
+#inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3vw 10vw;
+    z-index: 3;
+}
+.start__firstwall {
+    display: flex;
+    align-items: center;
+    gap: 3.5vw;
+    flex-wrap: nowrap;
+    transition: all 0.3s ease;
+}
+.start__firstwall p {
+    font-size: clamp(1.6rem, 2.2vw + 0.1rem, 10rem);
+    font-weight: bold;
+    transition: all 0.3s ease;
+    word-wrap: break-word; 
+}
+
+.start__image-container {
+    width: clamp(100px, 10vw + 12px, 640px);
+    height: clamp(100px, 10vw + 12px, 640px);
+    border-radius: 50%;
+    overflow: hidden;
+    background-image: url('../../../../public/assets/img/profile-icon.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.start__firstwall p span.effectTyping {
+    margin-top: -5px;
+}
+.start__second {
+    position: relative;
+    margin: 3.5vw 0 0 0;
+    padding: 4vh 0;
+}
+.start__decorative {
+    position: absolute;
+    background-color: #5D52FF;
+}
+.start__decorative.line-left {
+    display: flex;
+    flex-direction: initial;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 2px;
+}
+.start__decorative.line-right {
+    display: flex;
+    bottom: 0;
+    right: 0; 
+    width: 60%;
+    height: 3px;
+}
+.start__secondwall p {
+    font-size: clamp(1.3rem, 1.4vw + 0.1rem, 8rem);
+    font-weight: 500;
+    word-wrap: break-word; 
+}
+.effectTyping {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 2px solid white; 
+    white-space: nowrap;
+    margin: 0 auto;
+    line-height: 1.1;
+    vertical-align: middle;
+    letter-spacing: normal;
+    animation: blink-caret .75s step-end infinite;
+    color: #8ffdf3;
+}
+#start__blue {
+    color: #8ffdf3;
+    font-weight: 600;
+}
+/* Escalado positivo */
+@media (min-width: 1500px) {
+    .start__firstwall {
+        transform: scale(1.2);
+    }
+}
+
+@media (min-width: 2000px) {
+    .start__firstwall {
+        transform: scale(1.3);
+    }
+}
+/* --- Animación de escritura --- */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes delete {
+    from { width: 100%; }
+    to { width: 0; }
+}
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #ddff00; }
+}
+/* ------------------------------- */
+@media (max-width: 900px) {
+    .start__image-container {
+        width: 180px;
+        height: 180px;
+        transition: all 0.3s ease;
+    }
+    .start__firstwall{
+        width: 600px;
+        max-width: 600px;
+        overflow: hidden;
+        transform: scale(1);
+    }
+    .start__firstwall p {
+        font-size: 1.7rem;
+        transition: all 0.3s ease;
+    }
+}
+@media (max-width: 640px) {
+    .start__firstwall {
+        flex-direction: column; 
+        text-align: center;
+        gap: 0.2rem; 
+        width: 380px;
+        transition: all 0.3s ease;
+        transform: scale(1);
+    }
+    .start__firstwall p {
+        font-size: 1.6rem;
+        transition: all 0.3s ease;
+    }
+    .start__image-container {
+        width: 180px;
+        height: 180px;
+        transition: all 0.3s ease;
+    }
+    .effectTyping {
+        max-width: 290px;
+        font-size: 1.6rem;
+        transition: all 0.3s ease;
+    }
+}

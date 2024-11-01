@@ -1,13 +1,23 @@
+header {
+  background: rgb(20, 6, 42);
+  background: linear-gradient(
+    0deg,
+    rgba(20, 6, 42, 1) 0%,
+    rgba(47, 0, 122, 1) 100%
+  );
+}
 .headerMain {
   display: flex;
   justify-content: space-between;
-  margin: 0 14vw;
+  margin: 0 24vw;
+  padding: 3vh 0;
   z-index: 3;
-  transition: none;
+  animation: 1s ease-out 0s 1 fadeIn;
+  gap: 2vw;
 }
 h1 {
   color: #8ffdf3;
-  font-size: 26px;
+  font-size: clamp(1.6rem, 1.5vw + 0.1rem, 10rem);
   cursor: default;
   -webkit-user-drag: none;
 }
@@ -24,7 +34,7 @@ img {
 .icons-language {
   display: flex;
   gap: 0.4vw;
-  height: 32px;
+  height: clamp(20px, 2vw + 4px, 200px);
 }
 .hamburger-menu {
   margin-left: auto;
@@ -38,7 +48,7 @@ img {
 }
 .header--right a {
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: clamp(1.3rem, 0.95vw + 0.2rem, 10rem);
   color: white;
   font-weight: 600;
   transition: 0.3s ease;
@@ -90,7 +100,7 @@ body.menu-open {
   height: 100vh;
   width: 50vw;
   background-color: #14062acc;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(6px);
   justify-content: flex-start;
   padding-top: 15vh;
   z-index: 999;
@@ -172,7 +182,7 @@ body.menu-open {
 /* Media queries para pantallas pequeñas */
 @media (max-width: 868px) {
   .headerMain {
-    margin: 0 8vw;
+    margin: 0 12vw;
     transition: all 0.3s ease;
   }
   .header--left {

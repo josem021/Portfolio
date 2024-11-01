@@ -62,7 +62,6 @@ export class StarsComponent implements OnInit {
       this.animateStar(star);
     }
   }
-
   animateStar(star: HTMLElement): void {
     const delay = Math.random() * 3 + 's';
     this.renderer.setStyle(star, 'animation-delay', delay);
