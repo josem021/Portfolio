@@ -1,0 +1,18 @@
+{
+    "experiences": [
+        {
+            "title": "Rappi",
+            "period": "(15/04/2024 - 16/10/2024)",
+            "description": "En esta multinacional desarrollé habilidades como QA Functional, metodologías ágiles como SCRUM y habilidades blandas trabajando en un entorno remoto con compañeros de varias partes de Latinoamérica, a su vez, teniendo conocimientos de Jira, creación de casos de prueba etc...",
+            "specialty": "QA Tester",
+            "id": 2
+        },
+        {
+            "title": "Sena",
+            "period": "(2022 - 2024)",
+            "description": "En esta etapa desarrollé habilidades en el area de programación web, angular, python, mySQL, diseño UI/UX, control de versiones con GitHub y muchas competencias para el desarrollo personal.",
+            "specialty": "Analista y Desarrollador de Software",
+            "id": 1
+        }
+    ]
+}

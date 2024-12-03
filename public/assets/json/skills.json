@@ -1,0 +1,18 @@
+{
+    "languages": [
+        {"title": "Angular", "icon": "assets/img/iconsSkills/Angular.png"},
+        {"title": "TypeScript", "icon": "assets/img/iconsSkills/TypeScript.png"},
+        {"title": "JavaScript", "icon": "assets/img/iconsSkills/JavaScript.png"},
+        {"title": "HTML", "icon": "assets/img/iconsSkills/HTMLicon.png"},
+        {"title": "CSS", "icon": "assets/img/iconsSkills/CSSicon.png"},
+        {"title": "PHP", "icon": "assets/img/iconsSkills/PHPicon.png"},
+        {"title": "MySQL", "icon": "assets/img/iconsSkills/MySQL.png"}
+    ],
+    "tools": [
+        {"title": "Figma", "icon": "assets/img/iconsSkills/Figmaicon.png"},
+        {"title": "Cypress", "icon": "assets/img/iconsSkills/Cypressicon.png"},
+        {"title": "Jira", "icon": "assets/img/iconsSkills/JiraLogo.png"},
+        {"title": "Git", "icon": "assets/img/iconsSkills/GITicon.png"},
+        {"title": "Visual Studio Code", "icon": "assets/img/iconsSkills/VisualStudioC.png"}
+    ]
+}

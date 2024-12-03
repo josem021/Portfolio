@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
     }
   }
   private scrollToSection() {
-    const sectionId = this.currentRoute.slice(1); // Remove the leading '/'
+    const sectionId = this.currentRoute.slice(1); 
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });

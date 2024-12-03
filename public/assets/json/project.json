@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "title": "Proyecto Cinereview",
+        "description": "Reviews de películas y series creadas usando Angular y la API de TheMovieDB.",
+        "techStack": ["Angular", "TypeScript"],
+        "pageLink": "",
+        "image": "assets/img/img-json/Cinereview.png"
+    },
+    {
+        "id": 2,
+        "title": "Proyecto Veterinaria",
+        "description": "Proyecto veterinaria funcional con MySQL y PHP.",
+        "techStack": ["PHP","MySQL"],
+        "pageLink": "",
+        "image": "assets/img/img-json/Veterinaria.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Proyecto Timer Sena",
+        "description": "Proyecto veterinaria funcional con MySQL y PHP.",
+        "techStack": ["Angular", "TypeScript"],
+        "pageLink": "",
+        "image": "assets/img/img-json/TimerSENA.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Proyecto TipCalculator",
+        "description": "Calculadora de propinas divide el total según monto, porcentaje y personas.",
+        "techStack": ["JavaScript", "HTML", "CSS"],
+        "pageLink": "",
+        "image": "assets/img/img-json/TipCalculator.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Proyecto Crud Angular Básico",
+        "description": "Un CRUD básico hecho con Angular",
+        "techStack": ["Angular", "HTML", "CSS"],
+        "pageLink": "",
+        "image": "assets/img/img-json/crudAngularBasico.png"
+    },
+    {
+        "id": 6,
+        "title": "Calculador Edad",
+        "description": "Página para calcular la edad de una persona",
+        "techStack": ["JavaScript", "HTML", "CSS"],
+        "pageLink": "",
+        "image": "assets/img/img-json/calculatorAge.png"
+    },
+    {
+        "id": 7,
+        "title": "Proyecto Piedra, Papel, Tijeras",
+        "description": "Página de juego básico sobre Piedra, Papel y Tijeras",
+        "techStack": ["JavaScript", "HTML", "CSS"],
+        "pageLink": "",
+        "image": "assets/img/img-json/piedraPapelTijerasJS.jpg"
+    },
+    {
+        "id": 8,
+        "title": "Social Media Web Clone",
+        "description": "Clon de una página a modo de practica de HTML y CSS",
+        "techStack": ["HTML", "CSS"],
+        "pageLink": "",
+        "image": "assets/img/img-json/socialMediaWebClone.png"
+    }
+]

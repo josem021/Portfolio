@@ -2,33 +2,261 @@
   <section id="inicio">
     <div class="start__firstwall">
       <div class="start__image-container"></div>
-      <p>
-        Hola, mi nombre es<br>
-        José Miguel Mejía Crespo<br>
-        Soy <span class="effectTyping">{{Roledescription}}</span>
-      </p>
+      <h1>
+        Hola, mi nombre es<br />
+        José Miguel Mejía Crespo<br />
+        Soy <span class="effectTyping">{{ Roledescription }}</span>
+      </h1>
     </div>
     <div class="start__second">
       <div class="start__decorative line-left"></div>
       <div class="start__secondwall">
-        <p>Desarrollador web con conocimiento en <span id="start__blue">QA</span> y Testing, creo soluciones digitales,<br>
-          siempre pongo un punto de esfuerzo extra en lo que hago para que el trabajo<br>
-          ya sea en <span id="start__blue">equipo</span> o solitario sea satisfactorio, manejo metodología agile/SCRUM.
+        <p>
+          Desarrollador web con conocimiento en
+          <span id="start__blue">QA</span> y Testing, creo soluciones
+          digitales,
+          siempre pongo un punto de esfuerzo extra en lo que hago para que el
+          trabajo
+          ya sea en <span id="start__blue">equipo</span> o solitario sea
+          satisfactorio, manejo metodología agile/SCRUM.
         </p>
-      </div>
-      <div class="start__thirdwall">
-  
       </div>
       <div class="start__decorative line-right"></div>
     </div>
+    <div class="start__thirdwall">
+      <div class="buttonsCV">
+        <button>Descargar CV</button>
+        <div class="buttonsCV--Column">
+          <a href="https://www.linkedin.com/in/josem021/" target="_blank">
+            <img src="assets/img/linkedin.svg" alt="LinkedIn" />
+          </a>
+          <a href="https://github.com/josem021" target="_blank">
+            <img src="assets/img/github-logo.svg" alt="GitHub" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="proyectos">
+    <div class="project__firstwall">
+      <div class="project__firstwall-title">
+        <h2>Proyectos</h2>
+        <div class="project__firstwall-buttons">
+          <div class="filter-container">
+            <button class="filter-button" (click)="toggleLanguagesFilter()">
+              {{ selectedFilter }}
+              <img
+                src="assets/img/polygonFilter.svg"
+                [class.rotated]="showLanguagesFilter"
+                alt="filter-icon"
+              />
+            </button>
+            @if (showLanguagesFilter) {
+            <div class="languages-dropdown">
+              <div class="language-option" (click)="applyFilter('Todos')">
+                Todos
+              </div>
+              @for (language of uniqueLanguages; track language.title) {
+              <div
+                class="language-option"
+                (click)="applyFilter(language.title)"
+              >
+                <img
+                  [src]="language.icon"
+                  [alt]="'icon-' + language.title"
+                  class="language-icon"
+                />
+                <span>{{ language.title }}</span>
+              </div>
+              }
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="project__firstwall-content">
+        <div
+          class="project__firstwall-arrow Left"
+          (click)="previousPage()"
+          *ngIf="shouldShowArrows()"
+        >
+          <img src="assets/img/projectArrowLeft.svg" alt="arrowLeft" />
+        </div>
+
+        <div class="project__firstwall-projects__row row-1">
+          <div
+            class="project__firstwall-projects__col"
+            [attr.data-has-project]="
+              getProjectsForPosition(0).image ? 'true' : 'false'
+            "
+            [ngStyle]="getBackgroundStyle(getProjectsForPosition(0).image)"
+            (click)="
+              getProjectsForPosition(0).image &&
+                openLinkProject(getProjectsForPosition(0).pageLink)
+            "
+          >
+            <div
+              class="project-overlay"
+              *ngIf="getProjectsForPosition(0).image"
+              [attr.data-has-project]="true"
+            >
+              <p class="project-description">
+                {{ getProjectsForPosition(0).description }}
+              </p>
+              <div class="project-link__content">
+                <p>Visitar<br />Sitio:</p>
+                <div class="project-link">
+                  <img src="assets/img/link-icon.png" alt="project-link" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="project__firstwall-projects__col col-2"
+            [attr.data-has-project]="
+              getProjectsForPosition(1).image ? 'true' : 'false'
+            "
+            [ngStyle]="getBackgroundStyle(getProjectsForPosition(1).image)"
+            (click)="
+              getProjectsForPosition(1).image &&
+                openLinkProject(getProjectsForPosition(1).pageLink)
+            "
+          >
+            <div
+              class="project-overlay"
+              *ngIf="getProjectsForPosition(1).image"
+              [attr.data-has-project]="true"
+            >
+              <p class="project-description">
+                {{ getProjectsForPosition(1).description }}
+              </p>
+              <div class="project-link__content">
+                <p>Visitar<br />Sitio:</p>
+                <div class="project-link">
+                  <img src="assets/img/link-icon.png" alt="project-link" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project__firstwall-projects__row row-2">
+          <div
+            class="project__firstwall-projects__rowcol"
+            [attr.data-has-project]="
+              getProjectsForPosition(2).image ? 'true' : 'false'
+            "
+            [ngStyle]="getBackgroundStyle(getProjectsForPosition(2).image)"
+            (click)="
+              getProjectsForPosition(2).image &&
+                openLinkProject(getProjectsForPosition(2).pageLink)
+            "
+          >
+            <div
+              class="project-overlay"
+              *ngIf="getProjectsForPosition(2).image"
+              [attr.data-has-project]="true"
+            >
+              <p class="project-description">
+                {{ getProjectsForPosition(2).description }}
+              </p>
+              <div class="project-link__content">
+                <p>Visitar<br />Sitio:</p>
+                <div class="project-link">
+                  <img src="assets/img/link-icon.png" alt="project-link" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="project__firstwall-projects__rowcol rowcol-2"
+            [attr.data-has-project]="
+              getProjectsForPosition(3).image ? 'true' : 'false'
+            "
+            [ngStyle]="getBackgroundStyle(getProjectsForPosition(3).image)"
+            (click)="
+              getProjectsForPosition(3).image &&
+                openLinkProject(getProjectsForPosition(3).pageLink)
+            "
+          >
+            <div
+              class="project-overlay"
+              *ngIf="getProjectsForPosition(3).image"
+              [attr.data-has-project]="true"
+            >
+              <p class="project-description">
+                {{ getProjectsForPosition(3).description }}
+              </p>
+              <div class="project-link__content">
+                <p>Visitar<br />Sitio:</p>
+                <div class="project-link">
+                  <img src="assets/img/link-icon.png" alt="project-link" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="project__firstwall-arrow Right"
+          (click)="nextPage()"
+          *ngIf="shouldShowArrows()"
+        >
+          <img src="assets/img/projectArrowRight.svg" alt="arrowRight" />
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="proyectos">
-    <!-- Contenido de la sección de proyectos -->
+  <section id="experiencias">
+    <div class="experience__firstwall">
+      <div class="experience__firstwall-title">
+        <h3>Experiencias de Trabajo</h3>
+        <div class="project__firstwall-buttons">
+          <div class="filter-container">
+            <button class="filter-button" (click)="toggleExperienceFilter($event)">
+              {{ selectedExperience }} <img src="assets/img/polygonFilter.svg" [class.rotated]="showExperienceFilter" alt="filter-icon" />
+            </button>
+            <div *ngIf="showExperienceFilter" class="experience-dropdown">
+              <div class="language-option" (click)="selectExperience('Rappi')">Rappi</div>
+              <div class="language-option" (click)="selectExperience('Sena')">Sena</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="selectedExperienceData" class="experience__firstwall-content">
+        <div class="experience-details__title">
+          <h4>{{ selectedExperienceData.title }}</h4>
+          <p class="experience-period">{{ selectedExperienceData.period }}</p>
+        </div>
+        <div class="experience-details__subtitle">
+          <p class="experience-specialty">{{ selectedExperienceData.specialty }}</p>
+          <p class="experience-description">{{ selectedExperienceData.description }}</p>
+        </div>
+      </div>
+  
+      <div *ngIf="!selectedExperienceData" class="experience__firstwall-content">
+        <p>No hay experiencias disponibles</p>
+      </div>
+    </div>
   </section>
+  
 
   <section id="habilidades">
-    <!-- Contenido de la sección de habilidades -->
+    <div class="skills-title">
+      <h4>Habilidades</h4>
+    </div>
+    
+    <div class="skills-content">
+      <div class="skill-content__icons">
+        @for (skill of allSkills; track skill.title) {
+          <div class="skill-icon">
+            <img [src]="skill.icon" [alt]="skill.title">
+            <p>{{ skill.title }}</p>
+          </div>
+        }
+      </div>
+    </div>
   </section>
 
   <section id="contacto">

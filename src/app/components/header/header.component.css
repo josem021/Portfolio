@@ -1,20 +1,24 @@
 header {
+  position: sticky;
+  top: 0;
   background: rgb(20, 6, 42);
   background: linear-gradient(
     0deg,
     rgba(20, 6, 42, 1) 0%,
     rgba(47, 0, 122, 1) 100%
   );
+  z-index: 3; /* Asegúrate de que esté sobre otros elementos */
 }
+
 .headerMain {
   display: flex;
   justify-content: space-between;
   margin: 0 24vw;
-  padding: 3vh 0;
-  z-index: 3;
+  padding: 1.6vh 0;
   animation: 1s ease-out 0s 1 fadeIn;
   gap: 2vw;
 }
+
 h1 {
   color: #8ffdf3;
   font-size: clamp(1.6rem, 1.5vw + 0.1rem, 10rem);
@@ -34,7 +38,6 @@ img {
 .icons-language {
   display: flex;
   gap: 0.4vw;
-  height: clamp(20px, 2vw + 4px, 200px);
 }
 .hamburger-menu {
   margin-left: auto;
