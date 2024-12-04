@@ -62,5 +62,13 @@
         "techStack": ["HTML", "CSS"],
         "pageLink": "",
         "image": "assets/img/img-json/socialMediaWebClone.png"
+    }, 
+    {
+        "id": 9,
+        "title": "Portafolio Web",
+        "description": "Portafolio web donde destaco mis habilidades y experiencia profesional",
+        "techStack": ["Angular", "TypeScript"],
+        "pageLink": "https://josem021.netlify.app/",
+        "image": "assets/img/img-json/portafolio.avif"
     }
 ]

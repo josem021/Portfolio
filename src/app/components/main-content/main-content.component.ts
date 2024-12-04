@@ -139,8 +139,6 @@ export class MainContentComponent implements OnInit, OnDestroy {
       this.isSent = false;
     }
   }
-
-  @HostListener('document:click', ['$event'])
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: MouseEvent) {
     const filterContainer =
@@ -226,23 +224,20 @@ export class MainContentComponent implements OnInit, OnDestroy {
     // Crear las páginas
     for (let i = 0; i < totalPages; i++) {
       const startIdx = i * projectsPerPage;
-      const pageProjects = Array(4).fill({} as Projects); //INiciar objetos vacios
-
-      // Llenar con proyectos reales donde existan
+      const pageProjects = Array(4).fill({} as Projects);
+  
       for (let j = 0; j < projectsPerPage; j++) {
         if (startIdx + j < this.filteredProjects.length) {
           const project = this.filteredProjects[startIdx + j];
           if (project) {
             pageProjects[j] = {
               ...project,
-              image: project.image || '',
+              image: project.image || '', 
               pageLink: project.pageLink || '#',
             };
           }
         }
       }
-
-      this.displayProjects.push(pageProjects);
     }
   }
 
