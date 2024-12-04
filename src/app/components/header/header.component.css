@@ -7,13 +7,12 @@ header {
     rgba(20, 6, 42, 1) 0%,
     rgba(47, 0, 122, 1) 100%
   );
-  z-index: 3; /* Asegúrate de que esté sobre otros elementos */
+  z-index: 3;
 }
 
 .headerMain {
   display: flex;
-  justify-content: space-between;
-  margin: 0 24vw;
+  justify-content: space-evenly;
   padding: 1.6vh 0;
   animation: 1s ease-out 0s 1 fadeIn;
   gap: 2vw;
@@ -32,7 +31,6 @@ img {
 .header--left {
   display: flex;
   align-items: center;
-  width: auto;
   gap: 0.4vw;
 }
 .icons-language {
@@ -46,12 +44,11 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: auto;
   gap: 2vw;
 }
 .header--right a {
   text-decoration: none;
-  font-size: clamp(1.3rem, 0.95vw + 0.2rem, 10rem);
+  font-size: clamp(1.4rem, 0.8vw + 0.2rem, 18rem);
   color: white;
   font-weight: 600;
   transition: 0.3s ease;
@@ -177,6 +174,9 @@ body.menu-open {
   .header--right {
     display: none;
   }
+  .header--right a {
+    font-size: clamp(2rem, 2vw + 0.2rem, 12rem);
+  }
   .hamburger-menu {
     display: flex;
   }
@@ -184,10 +184,6 @@ body.menu-open {
 
 /* Media queries para pantallas pequeñas */
 @media (max-width: 868px) {
-  .headerMain {
-    margin: 0 12vw;
-    transition: all 0.3s ease;
-  }
   .header--left {
     width: auto;
   }
@@ -211,7 +207,7 @@ body.menu-open {
     margin: 10px 0;
   }
   h1 {
-    font-size: 22px;
+    font-size: clamp(1.5rem, 0.95vw + 0.2rem, 10rem);
   }
   .icons-language {
     gap: 1.5vw;

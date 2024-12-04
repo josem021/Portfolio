@@ -13,19 +13,20 @@
         </div>
       </section>
       <section class="header--right" [ngClass]="{'open': isMenuOpen}">
-        <a routerLink="/inicio" routerLinkActive="active" (click)="closeMenu()">Inicio</a>
-        <a routerLink="/proyectos" routerLinkActive="active" (click)="closeMenu()">Proyectos</a>
-        <a routerLink="/habilidades" routerLinkActive="active" (click)="closeMenu()">Habilidades</a>
-        <a routerLink="/contacto" routerLinkActive="active" (click)="closeMenu()">Contacto</a>
+        <a routerLink="/inicio" routerLinkActive="active" (click)="closeMenu()" (click)="navigateAndScroll('inicio')">Inicio</a>
+        <a routerLink="/proyectos" routerLinkActive="active" (click)="closeMenu()" (click)="navigateAndScroll('proyectos')">Proyectos</a>
+        <a routerLink="/proyectos" routerLinkActive="active" (click)="closeMenu()" (click)="navigateAndScroll('experiencias')">Experiencia</a>
+        <a routerLink="/habilidades" routerLinkActive="active" (click)="closeMenu()" (click)="navigateAndScroll('habilidades')">Habilidades</a>
+        <a routerLink="/contacto" routerLinkActive="active" (click)="closeMenu()" (click)="navigateAndScroll('contacto')">Contacto</a>
         @if (isMenuOpen) {
           <div class="buttonsCV">
-            <button>Descargar CV</button>
+            <button (click)="downloadCV()">Descargar CV</button>
             <div class="buttonsCV--Column">
-              <a routerLink="">
-                <img src="assets/img/linkedin.svg" alt="LinkedIn">
+              <a href="https://www.linkedin.com/in/josem021/" target="_blank">
+                <img src="assets/img/linkedin.svg" alt="LinkedIn" />
               </a>
-              <a routerLink="https://github.com/tu-usuario">
-                <img src="assets/img/github-logo.svg" alt="GitHub">
+              <a href="https://github.com/josem021" target="_blank">
+                <img src="assets/img/github-logo.svg" alt="GitHub" />
               </a>
             </div>
           </div>

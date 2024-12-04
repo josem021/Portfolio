@@ -20,22 +20,44 @@ export class HeaderComponent implements OnInit {
   currentRoute = '';
 
   constructor(private router: Router, private elementRef: ElementRef) {}
+
   ngOnInit() {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.currentRoute = event.urlAfterRedirects;
-        this.scrollToSection();
+        this.scrollToSection(this.currentRoute.slice(1));
       });
+    
     this.handleScreenSize();
     window.addEventListener('resize', this.handleScreenSize.bind(this));
   }
+  downloadCV() {
+    const linkDownload = document.createElement('a');
+    linkDownload.href = 'assets/cv/CV_José Miguel Mejía Crespo.pdf';
+    linkDownload.download = 'CV_José Miguel Mejía Crespo.pdf';
+    linkDownload.click();
+  }
+  navigateAndScroll(sectionId: string) {
+
+    if (this.router.url === `/${sectionId}`) {
+      this.scrollToSection(sectionId);
+    } else {
+      this.router.navigate([`/${sectionId}`]).then(() => {
+        this.scrollToSection(sectionId);
+      });
+    }
+    this.closeMenu();
+  }
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
+
   closeMenu() {
     this.isMenuOpen = false;
   }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const clickedInside = this.elementRef.nativeElement.contains(event.target);
@@ -43,13 +65,20 @@ export class HeaderComponent implements OnInit {
       this.closeMenu();
     }
   }
-  private scrollToSection() {
-    const sectionId = this.currentRoute.slice(1); 
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  private scrollToSection(sectionId: string) {
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 100);
   }
+
   private handleScreenSize() {
     const screenWidth = window.innerWidth;
     if (screenWidth > 585) {

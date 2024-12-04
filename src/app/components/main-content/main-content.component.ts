@@ -13,14 +13,17 @@ import { Observable } from 'rxjs';
 import { StarsComponent } from '../stars/stars.component';
 import { SkillsService } from '../../services/skills.service';
 import { Skills, Skill } from '../../interfaces/skills.interface';
-import {Experience} from '../../interfaces/experience.interface';
+import { Experience } from '../../interfaces/experience.interface';
 import { ExperienceService } from '../../services/experience.service';
 import { ElementRef } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EmailService } from '../../services/email.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-main-content',
   standalone: true,
-  imports: [NgStyle, NgIf],
+  imports: [NgStyle, NgIf, ReactiveFormsModule],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.css',
 })
@@ -42,7 +45,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   selectedExperience: string = 'Rappi';
   selectedExperienceData: Experience | null = null;
   showExperienceFilter = false;
-  
+
   private experienceService = inject(ExperienceService);
 
   /* - EXPERIENCE END - */
@@ -73,16 +76,70 @@ export class MainContentComponent implements OnInit, OnDestroy {
   currentIndex = 0;
   projectsPerView = 4;
 
+  //Formulario Reactivo
+  contactForm: FormGroup;
+  isSent: boolean | null = null;
+
   // Inyección del servicio en el constructor
   constructor(
     private projectService: ProjectsService,
     private skillService: SkillsService,
+    private formBuilder: FormBuilder,
+    private emailService: EmailService
   ) {
-    // Inicialización del servicio
+    // Inicializacion del servicio
     this.loadProjects();
     this.loadSkills();
     this.loadExperiences();
+    this.contactForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.maxLength(40)]],
+      email: ['', [Validators.required, Validators.email]],
+      subject: ['', [Validators.required, Validators.maxLength(80)]],
+      message: ['', [Validators.required, Validators.maxLength(4000)]],
+    });
   }
+  downloadCV() {
+    const linkDownload = document.createElement('a');
+    linkDownload.href = 'assets/cv/CV_José Miguel Mejía Crespo.pdf';
+    linkDownload.download = 'CV_José Miguel Mejía Crespo.pdf';
+    linkDownload.click();
+  }
+  onSubmit() {
+    if (this.contactForm.valid) {
+      const templateParams = {
+        from_name: this.contactForm.value.name,
+        to_name: 'José Miguel',
+        email: this.contactForm.value.email,
+        subject: this.contactForm.value.subject,
+        message: this.contactForm.value.message,
+      };
+
+      const serviceID = 'service_4schrvk';
+      const templateID = 'template_t5q670j';
+
+      this.emailService
+        .sendEmail(templateParams, serviceID, templateID)
+        .then(
+          (response) => {
+            console.log('Email enviado', response.status, response.text);
+            this.isSent = true;
+
+            this.contactForm.reset();
+          },
+          (error) => {
+            console.error('Error al enviar el email', error);
+            this.isSent = false;
+          }
+        )
+        .catch((error) => {
+          console.error('Error inesperado', error);
+          this.isSent = false;
+        });
+    } else {
+      this.isSent = false;
+    }
+  }
+
   @HostListener('document:click', ['$event'])
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: MouseEvent) {
@@ -95,8 +152,8 @@ export class MainContentComponent implements OnInit, OnDestroy {
     ) {
       this.showLanguagesFilter = false;
     }
-  
-    const experienceFilterContainer = 
+
+    const experienceFilterContainer =
       this.elementRef.nativeElement.querySelector('.filter-container');
     if (
       this.showExperienceFilter &&
@@ -114,7 +171,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   }
   @HostListener('touchmove', ['$event'])
   onTouchMove(event: TouchEvent) {
-    if(Math.abs(event.touches[0].clientX - this.touchStartX) > 10) {
+    if (Math.abs(event.touches[0].clientX - this.touchStartX) > 10) {
       this.isSwiping = true;
     }
   }
@@ -122,7 +179,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   onTouchEnd(event: TouchEvent) {
     const touchDuration = Date.now() - this.touchStartTime;
     this.touchEndX = event.changedTouches[0].clientX;
-  
+
     if (this.isSwiping && touchDuration > this.maxClickDuration) {
       this.handleSwipe();
     }
@@ -131,7 +188,11 @@ export class MainContentComponent implements OnInit, OnDestroy {
     const swipeDistance = this.touchEndX - this.touchStartX;
     if (swipeDistance > this.minSwipeDistance) {
       this.previousPage();
-    } else if (swipeDistance < 0 && this.currentIndex < Math.ceil(this.filteredProjects.length / this.projectsPerView) - 1) {
+    } else if (
+      swipeDistance < 0 &&
+      this.currentIndex <
+        Math.ceil(this.filteredProjects.length / this.projectsPerView) - 1
+    ) {
       this.nextPage();
     }
   }
@@ -150,21 +211,23 @@ export class MainContentComponent implements OnInit, OnDestroy {
   paginateProjects() {
     this.displayProjects = [];
     const projectsPerPage = 4;
-    
+
     // Si no hay proyectos filtrados, crear un grupo vacío
     if (this.filteredProjects.length === 0) {
       this.displayProjects.push(Array(4).fill({} as Projects));
       return;
     }
-    
+
     // Calcular el número total de páginas necesarias
-    const totalPages = Math.ceil(this.filteredProjects.length / projectsPerPage);
-    
+    const totalPages = Math.ceil(
+      this.filteredProjects.length / projectsPerPage
+    );
+
     // Crear las páginas
     for (let i = 0; i < totalPages; i++) {
       const startIdx = i * projectsPerPage;
-      const pageProjects = Array(4).fill({} as Projects); // Inicializar con objetos vacíos
-      
+      const pageProjects = Array(4).fill({} as Projects); //INiciar objetos vacios
+
       // Llenar con proyectos reales donde existan
       for (let j = 0; j < projectsPerPage; j++) {
         if (startIdx + j < this.filteredProjects.length) {
@@ -172,17 +235,17 @@ export class MainContentComponent implements OnInit, OnDestroy {
           if (project) {
             pageProjects[j] = {
               ...project,
-              image: project.image || '', // Asegurar que la imagen exista
-              pageLink: project.pageLink || '#' 
+              image: project.image || '',
+              pageLink: project.pageLink || '#',
             };
           }
         }
       }
-      
+
       this.displayProjects.push(pageProjects);
     }
   }
-  
+
   private loadSkills() {
     this.skillService.getSkills().subscribe({
       next: (skills) => {
@@ -211,25 +274,25 @@ export class MainContentComponent implements OnInit, OnDestroy {
   applyFilter(language: string) {
     this.selectedFilter = language;
     this.currentIndex = 0;
-    
+
     if (language === 'Todos') {
       this.filteredProjects = [...this.projects];
     } else {
-      this.filteredProjects = this.projects.filter(project => 
+      this.filteredProjects = this.projects.filter((project) =>
         project.techStack.includes(language)
       );
     }
-    
+
     this.paginateProjects();
   }
   getVisibleProjects() {
     const pages = [];
     const projects = this.filteredProjects;
-    
+
     for (let i = 0; i < projects.length; i += this.projectsPerPage) {
       pages.push(projects.slice(i, i + this.projectsPerPage));
     }
-    
+
     return pages;
   }
   getMaxPages() {
@@ -240,23 +303,23 @@ export class MainContentComponent implements OnInit, OnDestroy {
     return `translateX(${-100 * this.currentIndex}%)`;
   }
 
-  
   getBackgroundStyle(imageUrl: string | undefined) {
     if (!imageUrl) {
       return {
-        'background-color': '#16161a'
+        'background-color': '#16161a',
       };
     }
     return {
       'background-image': `url(${imageUrl})`,
       'background-size': 'cover',
       'background-position': 'center',
-      'background-repeat': 'no-repeat'
+      'background-repeat': 'no-repeat',
     };
   }
 
   nextPage() {
-    const maxIndex = Math.ceil(this.filteredProjects.length / this.projectsPerView) - 1;
+    const maxIndex =
+      Math.ceil(this.filteredProjects.length / this.projectsPerView) - 1;
     if (this.currentIndex < maxIndex) {
       this.currentIndex++;
     }
@@ -269,13 +332,12 @@ export class MainContentComponent implements OnInit, OnDestroy {
   }
   getProjectsForPosition(position: number): Projects {
     const index = this.currentIndex * this.projectsPerView + position;
-    return this.filteredProjects[index] || {} as Projects;
+    return this.filteredProjects[index] || ({} as Projects);
   }
 
   shouldShowArrows(): boolean {
     return true;
   }
-
 
   trackProjectById(index: number, project: Projects) {
     return project.id;
@@ -292,7 +354,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
       (error) => {
         console.error('Error loading skills:', error);
       }
-    )
+    );
   }
 
   ngOnDestroy() {
@@ -308,8 +370,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
 
   typeRole() {
     const currentRole = this.roles[this.currentRoleIndex];
-    const typingDuration = 150;
-    const deletingDuration = 75;
+    const typingDuration = 100;
 
     let currentText = '';
     let textLength = 0;
@@ -360,21 +421,25 @@ export class MainContentComponent implements OnInit, OnDestroy {
   }
 
   /*--- Experience funcs ---*/
-  
+
   loadExperiences() {
     this.experienceService.getExperiences().subscribe({
       next: (experiences) => {
         // Asegúrate de que experiences sea un array
-        this.experiences = Array.isArray(experiences) ? experiences : [experiences];
+        this.experiences = Array.isArray(experiences)
+          ? experiences
+          : [experiences];
         this.setDefaultExperience();
       },
       error: (error) => {
         console.error('Error loading experiences:', error);
-      }
+      },
     });
   }
   setDefaultExperience() {
-    const defaultExperience = this.experiences.find(exp => exp.title === 'Rappi');
+    const defaultExperience = this.experiences.find(
+      (exp) => exp.title === 'Rappi'
+    );
     if (defaultExperience) {
       this.selectedExperience = defaultExperience.title;
       this.selectedExperienceData = defaultExperience;
@@ -384,16 +449,16 @@ export class MainContentComponent implements OnInit, OnDestroy {
       this.selectedExperienceData = this.experiences[0];
     }
   }
-  
+
   toggleExperienceFilter(event: MouseEvent) {
     event.stopPropagation();
     this.showExperienceFilter = !this.showExperienceFilter;
   }
 
-
   selectExperience(title: string) {
     this.selectedExperience = title;
-    this.selectedExperienceData = this.experiences.find(exp => exp.title === title) || null;
-    this.showExperienceFilter = false; // Cierra el dropdown después de seleccionar
+    this.selectedExperienceData =
+      this.experiences.find((exp) => exp.title === title) || null;
+    this.showExperienceFilter = false; // Se cierra el dropdown tras seleccionar
   }
 }

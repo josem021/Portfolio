@@ -13,11 +13,9 @@
       <div class="start__secondwall">
         <p>
           Desarrollador web con conocimiento en
-          <span id="start__blue">QA</span> y Testing, creo soluciones
-          digitales,
+          <span id="start__blue">QA</span> y Testing, creo soluciones digitales,
           siempre pongo un punto de esfuerzo extra en lo que hago para que el
-          trabajo
-          ya sea en <span id="start__blue">equipo</span> o solitario sea
+          trabajo ya sea en <span id="start__blue">equipo</span> o solitario sea
           satisfactorio, manejo metodología agile/SCRUM.
         </p>
       </div>
@@ -25,7 +23,7 @@
     </div>
     <div class="start__thirdwall">
       <div class="buttonsCV">
-        <button>Descargar CV</button>
+        <button (click)="downloadCV()">Descargar CV</button>
         <div class="buttonsCV--Column">
           <a href="https://www.linkedin.com/in/josem021/" target="_blank">
             <img src="assets/img/linkedin.svg" alt="LinkedIn" />
@@ -213,12 +211,24 @@
         <h3>Experiencias de Trabajo</h3>
         <div class="project__firstwall-buttons">
           <div class="filter-container">
-            <button class="filter-button" (click)="toggleExperienceFilter($event)">
-              {{ selectedExperience }} <img src="assets/img/polygonFilter.svg" [class.rotated]="showExperienceFilter" alt="filter-icon" />
+            <button
+              class="filter-button"
+              (click)="toggleExperienceFilter($event)"
+            >
+              {{ selectedExperience }}
+              <img
+                src="assets/img/polygonFilter.svg"
+                [class.rotated]="showExperienceFilter"
+                alt="filter-icon"
+              />
             </button>
             <div *ngIf="showExperienceFilter" class="experience-dropdown">
-              <div class="language-option" (click)="selectExperience('Rappi')">Rappi</div>
-              <div class="language-option" (click)="selectExperience('Sena')">Sena</div>
+              <div class="language-option" (click)="selectExperience('Rappi')">
+                Rappi
+              </div>
+              <div class="language-option" (click)="selectExperience('Sena')">
+                Sena
+              </div>
             </div>
           </div>
         </div>
@@ -230,36 +240,161 @@
           <p class="experience-period">{{ selectedExperienceData.period }}</p>
         </div>
         <div class="experience-details__subtitle">
-          <p class="experience-specialty">{{ selectedExperienceData.specialty }}</p>
-          <p class="experience-description">{{ selectedExperienceData.description }}</p>
+          <p class="experience-specialty">
+            {{ selectedExperienceData.specialty }}
+          </p>
+          <p class="experience-description">
+            {{ selectedExperienceData.description }}
+          </p>
         </div>
       </div>
-  
-      <div *ngIf="!selectedExperienceData" class="experience__firstwall-content">
+
+      <div
+        *ngIf="!selectedExperienceData"
+        class="experience__firstwall-content"
+      >
         <p>No hay experiencias disponibles</p>
       </div>
     </div>
   </section>
-  
 
   <section id="habilidades">
     <div class="skills-title">
       <h4>Habilidades</h4>
     </div>
-    
+
     <div class="skills-content">
       <div class="skill-content__icons">
         @for (skill of allSkills; track skill.title) {
-          <div class="skill-icon">
-            <img [src]="skill.icon" [alt]="skill.title">
-            <p>{{ skill.title }}</p>
-          </div>
+        <div class="skill-icon">
+          <img [src]="skill.icon" [alt]="skill.title" />
+          <p>{{ skill.title }}</p>
+        </div>
         }
       </div>
     </div>
   </section>
 
   <section id="contacto">
-    <!-- Contenido de la sección de contacto -->
+    <h5>¡Contáctame!</h5>
+    <article class="contact-main">
+      <div class="contact-main__left">
+        <p class="contact-main__left-text">
+          Puedes escribirme en cualquier momento, responderé lo más pronto
+          posible
+        </p>
+        <div class="contact-main__mail">
+          <p class="contact-main__text"><span id="start__blue">Correo</span></p>
+          <p class="contact-main__text-email">
+            <span>joossec21j&commat;gmail.com</span>
+          </p>
+        </div>
+        <div class="contact-main__phone">
+          <p class="contact-main__text">
+            <span id="start__blue">Teléfono</span>
+          </p>
+          <p class="contact-main__text-phone">+57 317 8935659</p>
+        </div>
+        <div class="buttonsCV buttonsCV-footer">
+          <button (click)="downloadCV()">Descargar CV</button>
+          <div class="buttonsCV--Column">
+            <a href="https://www.linkedin.com/in/josem021/" target="_blank">
+              <img src="assets/img/linkedin.svg" alt="LinkedIn" />
+            </a>
+            <a href="https://github.com/josem021" target="_blank">
+              <img src="assets/img/github-logo.svg" alt="GitHub" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-main__right">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <div class="contact-main__right-FormUp">
+            <div class="form-group">
+              <label for="name">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                required
+              />
+              <small
+                *ngIf="
+                  contactForm.get('name')?.hasError('maxlength') &&
+                  contactForm.get('name')?.touched
+                "
+                >Nombre no debe exceder 40 caracteres</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="email">Correo</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                required
+              />
+              <small
+                *ngIf="
+                  contactForm.get('email')?.hasError('email') &&
+                  contactForm.get('email')?.touched
+                "
+                >Correo electrónico no válido</small
+              >
+            </div>
+          </div>
+          <div class="contact-main__right-FormDown">
+            <div class="form-group">
+              <label for="subject">Asunto</label>
+              <input
+                type="text"
+                class="form-control"
+                id="subject"
+                formControlName="subject"
+                required
+              />
+              <small
+                *ngIf="
+                  contactForm.get('subject')?.hasError('maxlength') &&
+                  contactForm.get('subject')?.touched
+                "
+                >Asunto no debe exceder 80 caracteres</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="message">Mensaje</label>
+              <textarea
+                class="form-control"
+                id="message"
+                formControlName="message"
+                required
+              ></textarea>
+              <small
+                *ngIf="
+                  contactForm.get('message')?.hasError('maxlength') &&
+                  contactForm.get('message')?.touched
+                "
+                >Mensaje no debe exceder 4000 caracteres</small
+              >
+            </div>
+            <div class="contact-main__btn">
+              <button
+                type="submit"
+                class="custom-submit-btn"
+                [disabled]="!contactForm.valid"
+              >
+                Enviar
+              </button>
+              <div class="mt-2" *ngIf="isSent !== null">
+                <span *ngIf="isSent; else notSent">Enviado con éxito</span>
+                <ng-template #notSent>No se pudo enviar</ng-template>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </article>
   </section>
 </main>
