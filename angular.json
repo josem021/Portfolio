@@ -25,7 +25,8 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "src/_redirects"
+              "src/_redirects",
+              "src/sitemap.xml"
               
             ],
             "styles": [
@@ -85,7 +86,8 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "src/_redirects"
+              "src/_redirects",
+              "src/sitemap.xml"
             ],
             "styles": [
               "src/styles.css"
