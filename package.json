@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ts-node create-env.ts && ng build",
+    "build": "npx ts-node create-env.ts && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -35,6 +35,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.5.2"
   }
 }
