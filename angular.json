@@ -26,8 +26,8 @@
                 "input": "public"
               },
               "src/_redirects",
-              "src/sitemap.xml"
-              
+              "src/sitemap.xml",
+              "src/google0957459d72152771.html"
             ],
             "styles": [
               "src/styles.css"
