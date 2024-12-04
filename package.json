@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "type": "module",
     "build": "npx ts-node create-env.ts || true && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
