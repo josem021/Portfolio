@@ -34,6 +34,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   private intervalId: any;
   private isDeleting = false;
   private touchStartX: number = 0;
+  private touchStartY: number = 0;
   private touchEndX: number = 0;
   private isSwiping: boolean = false;
   private touchStartTime: number = 0;
@@ -104,6 +105,13 @@ export class MainContentComponent implements OnInit, OnDestroy {
     linkDownload.download = 'CV_José Miguel Mejía Crespo.pdf';
     linkDownload.click();
   }
+  isMobileView = true;
+
+  toggleMobileDesktopView() {
+    if (window.innerWidth < 1024) {
+      this.isMobileView = !this.isMobileView;
+    }
+  }
   onSubmit() {
     if (this.contactForm.valid) {
       const templateParams = {
@@ -164,15 +172,23 @@ export class MainContentComponent implements OnInit, OnDestroy {
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent) {
     this.touchStartX = event.touches[0].clientX;
+    this.touchStartY = event.touches[0].clientY; // Store initial Y position
     this.touchStartTime = Date.now();
     this.isSwiping = false;
   }
+
   @HostListener('touchmove', ['$event'])
   onTouchMove(event: TouchEvent) {
-    if (Math.abs(event.touches[0].clientX - this.touchStartX) > 10) {
+    const deltaX = event.touches[0].clientX - this.touchStartX;
+    const deltaY = event.touches[0].clientY - this.touchStartY;
+
+    // Check if horizontal movement is significant AND vertical is minimal
+    if (Math.abs(deltaX) > 10 && Math.abs(deltaY) < 2) {
+      // Adjust deltaY threshold as needed
       this.isSwiping = true;
     }
   }
+
   @HostListener('touchend', ['$event'])
   onTouchEnd(event: TouchEvent) {
     const touchDuration = Date.now() - this.touchStartTime;
@@ -225,14 +241,14 @@ export class MainContentComponent implements OnInit, OnDestroy {
     for (let i = 0; i < totalPages; i++) {
       const startIdx = i * projectsPerPage;
       const pageProjects = Array(4).fill({} as Projects);
-  
+
       for (let j = 0; j < projectsPerPage; j++) {
         if (startIdx + j < this.filteredProjects.length) {
           const project = this.filteredProjects[startIdx + j];
           if (project) {
             pageProjects[j] = {
               ...project,
-              image: project.image || '', 
+              image: project.image || '',
               pageLink: project.pageLink || '#',
             };
           }
